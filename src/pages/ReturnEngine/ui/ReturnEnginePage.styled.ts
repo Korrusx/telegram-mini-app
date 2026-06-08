@@ -10,6 +10,7 @@ export const Page = styled(Box)`
 export const Header = styled(Typography)`
   font-weight: 700;
   margin-bottom: 16px;
+  color: black;
 `;
 
 export const MainCard = styled(Paper)`

@@ -24,6 +24,7 @@ export const AppBottomNavigation = () => {
       }}
     >
       <BottomNavigation
+        showLabels
         value={location.pathname}
         onChange={(_, value) => navigate(value)}
       >

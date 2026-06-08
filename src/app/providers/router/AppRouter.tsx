@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { MainLayout } from "../../layouts/MainLayout.tsx";
 
-import { ReturnEnginePage } from "../../../pages/ReturnEngine/ui/ReturnEnginePage";
+import { ReturnEnginePage } from "@pages/ReturnEngine/ui/ReturnEnginePage.tsx";
 // import { ClientsPage } from "../../../pages/Clients/ui/ClientsPage";
 // import { IncomePage } from "../../../pages/Income/ui/IncomePage";
 // import { MorePage } from "../../../pages/More/ui/MorePage";

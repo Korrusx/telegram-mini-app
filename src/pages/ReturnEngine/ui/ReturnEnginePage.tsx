@@ -111,8 +111,8 @@ export const ReturnEnginePage = () => {
       </StatsRow>
 
       {/* CLIENTS TITLE (без кнопки!) */}
-      <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-        Пора написать
+      <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: "black" }}>
+        Ближайшие напоминания
       </Typography>
 
       <ClientsStack>
