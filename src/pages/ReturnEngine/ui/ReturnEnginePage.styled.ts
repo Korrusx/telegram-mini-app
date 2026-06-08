@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import { Box, Paper, Stack, Typography, Avatar } from "@mui/material";
+import { colors } from "@shared/theme/colors";
 
 export const Page = styled(Box)`
   padding: 16px;
-  background: #f6f7fb;
+  background: ${colors.grey[20]};
   min-height: 100vh;
 `;
 
 export const Header = styled(Typography)`
   font-weight: 700;
   margin-bottom: 16px;
-  color: black;
+  color: ${colors.grey[1000]};
 `;
 
 export const MainCard = styled(Paper)`
@@ -18,8 +19,15 @@ export const MainCard = styled(Paper)`
     padding: 24px;
     border-radius: 16px;
     margin-bottom: 16px;
-    background: linear-gradient(180deg, #8a7cff 0%, #4b3fd9 100%);
-    color: #fff;
+
+    background: linear-gradient(
+      180deg,
+      ${colors.primary.light} 0%,
+      ${colors.primary.main} 100%
+    );
+
+    color: ${colors.common.white};
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,7 +50,8 @@ export const StatCard = styled(Paper)<{ bg?: string }>`
     flex-direction: column;
     justify-content: space-between;
 
-    background: ${({ bg }) => bg || "#fff"};
+    background: ${({ bg }) => bg || colors.common.white};
+    box-shadow: 0 2px 10px ${colors.greyAlpha[40]};
   }
 `;
 
@@ -58,6 +67,9 @@ export const ClientCard = styled(Paper)`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    background: ${colors.common.white};
+    box-shadow: 0 2px 10px ${colors.greyAlpha[40]};
   }
 `;
 
@@ -78,15 +90,16 @@ export const ClientDetail = styled(Box)`
 export const ClientAvatar = styled(Avatar)`
   width: 48px;
   height: 48px;
-  background: #6954ee;
+  background: ${colors.blue[500]};
 `;
 
 export const ClientName = styled(Typography)`
   font-weight: 600;
+  color: ${colors.grey[900]};
 `;
 
 export const ClientService = styled(Typography)`
-  color: #64748b;
+  color: ${colors.grey[400]};
   font-size: 14px;
 `;
 
@@ -97,5 +110,5 @@ export const StatusText = styled(Typography)<{ color: string }>`
 
 export const SmallText = styled(Typography)`
   font-size: 12px;
-  color: #94a3b8;
+  color: ${colors.grey[300]};
 `;
