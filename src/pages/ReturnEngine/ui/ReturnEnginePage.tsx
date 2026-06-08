@@ -5,7 +5,6 @@ import {
   MainCard,
   StatsRow,
   StatCard,
-  SectionHeader,
   ClientsStack,
   ClientCard,
   ClientInfo,
@@ -14,7 +13,7 @@ import {
   ClientService,
   StatusText,
   SmallText,
-  SeeAllButton,
+  ClientDetail,
 } from "./ReturnEnginePage.styled.ts";
 
 export const ReturnEnginePage = () => {
@@ -56,7 +55,6 @@ export const ReturnEnginePage = () => {
   ];
 
   const diff = stats.incomeToday - stats.incomeYesterday;
-  const percent = Math.round((diff / stats.incomeYesterday) * 100);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -84,7 +82,7 @@ export const ReturnEnginePage = () => {
 
         <Typography variant="body2">
           {diff >= 0 ? "+" : ""}
-          {diff.toLocaleString()} ₽ ({percent}% к вчера)
+          {diff.toLocaleString()} ₽ к вчера
         </Typography>
       </MainCard>
 
@@ -112,13 +110,10 @@ export const ReturnEnginePage = () => {
         </StatCard>
       </StatsRow>
 
-      <SectionHeader>
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          Пора написать
-        </Typography>
-
-        <SeeAllButton size="small">Смотреть всех</SeeAllButton>
-      </SectionHeader>
+      {/* CLIENTS TITLE (без кнопки!) */}
+      <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+        Пора написать
+      </Typography>
 
       <ClientsStack>
         {returnClients.map((client) => (
@@ -126,10 +121,10 @@ export const ReturnEnginePage = () => {
             <ClientInfo>
               <ClientAvatar>{client.avatar}</ClientAvatar>
 
-              <Box>
+              <ClientDetail>
                 <ClientName>{client.name}</ClientName>
                 <ClientService>{client.service}</ClientService>
-              </Box>
+              </ClientDetail>
             </ClientInfo>
 
             <Box sx={{ textAlign: "right" }}>
@@ -141,6 +136,20 @@ export const ReturnEnginePage = () => {
           </ClientCard>
         ))}
       </ClientsStack>
+
+      <Box sx={{ mt: 2, textAlign: "center" }}>
+        <Typography
+          onClick={() => console.log("go to clients")}
+          sx={{
+            color: "#6954EE",
+            fontWeight: 600,
+            cursor: "pointer",
+            fontSize: 14,
+          }}
+        >
+          Смотреть всех
+        </Typography>
+      </Box>
     </Page>
   );
 };
