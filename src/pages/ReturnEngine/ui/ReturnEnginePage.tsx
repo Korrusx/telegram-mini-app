@@ -1,4 +1,21 @@
-import { Avatar, Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import {
+  Page,
+  Header,
+  MainCard,
+  StatsRow,
+  StatCard,
+  SectionHeader,
+  ClientsStack,
+  ClientCard,
+  ClientInfo,
+  ClientAvatar,
+  ClientName,
+  ClientService,
+  StatusText,
+  SmallText,
+  SeeAllButton,
+} from "./ReturnEnginePage.styled.ts";
 
 export const ReturnEnginePage = () => {
   const stats = {
@@ -36,14 +53,6 @@ export const ReturnEnginePage = () => {
       status: "Скоро",
       avatar: "Е",
     },
-    {
-      id: 4,
-      name: "Ольга Васильева",
-      service: "Маникюр",
-      days: 21,
-      status: "Пора написать",
-      avatar: "О",
-    },
   ];
 
   const diff = stats.incomeToday - stats.incomeYesterday;
@@ -53,221 +62,85 @@ export const ReturnEnginePage = () => {
     switch (status) {
       case "Просрочен":
         return "#ef4444";
-
       case "Пора написать":
         return "#f59e0b";
-
       case "Скоро":
-        return "#22c55ue";
-
+        return "#22c55e";
       default:
         return "#64748b";
     }
   };
 
   return (
-    <Box
-      sx={{
-        p: 2,
-        background: "#F6F7FB",
-        minHeight: "100vh",
-      }}
-    >
-      <Typography variant="h6" fontWeight={700} mb={2}>
-        Главная
-      </Typography>
+    <Page>
+      <Header variant="h6">Главная</Header>
 
-      <Paper
-        elevation={0}
-        sx={{
-          p: 3,
-          borderRadius: 4,
-          mb: 2,
+      <MainCard elevation={0}>
+        <Typography variant="body2">Доход сегодня</Typography>
 
-          background: "linear-gradient(180deg, #8A7CFF 0%, #4B3FD9 100%)",
-
-          color: "#fff",
-
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <Typography
-          variant="body2"
-          sx={{
-            opacity: 0.9,
-          }}
-        >
-          Доход сегодня
-        </Typography>
-
-        <Typography variant="h3" fontWeight={700} sx={{ mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 700 }}>
           {stats.incomeToday.toLocaleString()} ₽
         </Typography>
 
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 1,
-            color: diff >= 0 ? "rgba(255,255,255,0.9)" : "#ffd4d4",
-          }}
-        >
+        <Typography variant="body2">
           {diff >= 0 ? "+" : ""}
           {diff.toLocaleString()} ₽ ({percent}% к вчера)
         </Typography>
-      </Paper>
+      </MainCard>
 
-      <Stack direction="row" spacing={1.5} mb={3}>
-        <Paper
-          sx={{
-            flex: 1,
-            p: 1.5,
-            borderRadius: 3,
-            background: "#E8F7ED",
-            minHeight: 100,
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="caption" color="text.secondary">
-            Клиенты
-          </Typography>
-
-          <Typography variant="h6" fontWeight={700}>
-            {stats.clients}
-          </Typography>
-
-          <Typography variant="caption" color="success.main">
+      <StatsRow direction="row" spacing={1.5}>
+        <StatCard bg="#E8F7ED">
+          <Typography variant="caption">Клиенты</Typography>
+          <Typography variant="h6">{stats.clients}</Typography>
+          <Typography color="success.main">
             +{stats.clientsDiff} новых
           </Typography>
-        </Paper>
+        </StatCard>
 
-        <Paper
-          sx={{
-            flex: 1,
-            p: 1.5,
-            borderRadius: 3,
-            background: "#FFF6E5",
-            minHeight: 100,
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="caption" color="text.secondary">
-            Пора вернуть
-          </Typography>
-
-          <Typography variant="h6" fontWeight={700}>
-            {stats.toReturn}
-          </Typography>
-
-          <Typography variant="caption" color="text.secondary">
+        <StatCard bg="#FFF6E5">
+          <Typography variant="caption">Пора вернуть</Typography>
+          <Typography variant="h6">{stats.toReturn}</Typography>
+          <Typography variant="caption">
             {stats.toReturnDiff} к вчера
           </Typography>
-        </Paper>
+        </StatCard>
 
-        <Paper
-          sx={{
-            flex: 1,
-            p: 1.5,
-            borderRadius: 3,
-            background: "#E8F1FF",
-            minHeight: 100,
+        <StatCard bg="#E8F1FF">
+          <Typography variant="caption">Записи</Typography>
+          <Typography variant="h6">{stats.bookings}</Typography>
+          <Typography variant="caption">на неделю</Typography>
+        </StatCard>
+      </StatsRow>
 
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="caption" color="text.secondary">
-            Записи
-          </Typography>
-
-          <Typography variant="h6" fontWeight={700}>
-            {stats.bookings}
-          </Typography>
-
-          <Typography variant="caption" color="text.secondary">
-            на неделю
-          </Typography>
-        </Paper>
-      </Stack>
-
-      <Box sx={{ mt: 3 }}>
-        <Typography variant="h6" fontWeight={700} textAlign="center" mb={2}>
+      <SectionHeader>
+        <Typography variant="h6" sx={{ fontWeight: 700 }}>
           Пора написать
         </Typography>
 
-        <Stack spacing={1.5}>
-          {returnClients.slice(0, 3).map((client) => (
-            <Paper
-              key={client.id}
-              elevation={0}
-              sx={{
-                p: 2,
-                borderRadius: 3,
+        <SeeAllButton size="small">Смотреть всех</SeeAllButton>
+      </SectionHeader>
 
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <Avatar
-                  sx={{
-                    width: 48,
-                    height: 48,
-                    bgcolor: "#6954EE",
-                  }}
-                >
-                  {client.avatar}
-                </Avatar>
+      <ClientsStack>
+        {returnClients.map((client) => (
+          <ClientCard key={client.id} elevation={0}>
+            <ClientInfo>
+              <ClientAvatar>{client.avatar}</ClientAvatar>
 
-                <Box>
-                  <Typography fontWeight={600}>{client.name}</Typography>
-
-                  <Typography variant="body2" color="text.secondary">
-                    {client.service}
-                  </Typography>
-                </Box>
-              </Stack>
-
-              <Box textAlign="right">
-                <Typography
-                  fontWeight={600}
-                  sx={{
-                    color: getStatusColor(client.status),
-                  }}
-                >
-                  {client.status}
-                </Typography>
-
-                <Typography variant="caption" color="text.secondary">
-                  {client.days} дней назад
-                </Typography>
+              <Box>
+                <ClientName>{client.name}</ClientName>
+                <ClientService>{client.service}</ClientService>
               </Box>
-            </Paper>
-          ))}
-        </Stack>
+            </ClientInfo>
 
-        <Button
-          fullWidth
-          variant="text"
-          sx={{
-            mt: 2,
-            textTransform: "none",
-            fontWeight: 600,
-          }}
-        >
-          Смотреть всех
-        </Button>
-      </Box>
-    </Box>
+            <Box sx={{ textAlign: "right" }}>
+              <StatusText color={getStatusColor(client.status)}>
+                {client.status}
+              </StatusText>
+              <SmallText>{client.days} дней назад</SmallText>
+            </Box>
+          </ClientCard>
+        ))}
+      </ClientsStack>
+    </Page>
   );
 };
