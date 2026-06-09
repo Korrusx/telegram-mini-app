@@ -16,10 +16,8 @@
 
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* 👇 ВОТ ЭТО ДОБАВЬ */
     "baseUrl": ".",
     "paths": {
       "@app/*": ["src/app/*"],
