@@ -1,31 +1,40 @@
-import WebApp from "@twa-dev/sdk";
+type TgUser = {
+  id: number;
+  first_name: string;
+  username?: string;
+  photo_url?: string;
+};
 
-const isMock = import.meta.env.VITE_MOCK_TELEGRAM === "true";
+const tg = window.Telegram?.WebApp;
 
-const mockUser = {
+const isTelegram = !!tg?.initDataUnsafe?.user;
+
+const mockUser: TgUser = {
   id: 1,
-  first_name: "Алексей",
+  first_name: "Dev",
   username: "dev_user",
   photo_url: "",
 };
 
-export const tg = WebApp;
-
 export function initTelegram() {
-  if (isMock) return;
+  if (!isTelegram) return;
 
-  tg.ready();
-  tg.expand();
+  tg?.ready();
+  tg?.expand();
 }
 
-export function getTelegramUser() {
-  if (isMock) return mockUser;
+export function getTelegramUser(): TgUser {
+  if (!isTelegram) return mockUser;
 
-  return tg.initDataUnsafe?.user ?? null;
+  return tg!.initDataUnsafe.user;
 }
 
 export function getTelegramInitData() {
-  if (isMock) return "mock-init-data";
+  if (!isTelegram) return "mock-init-data";
 
-  return tg.initData;
+  return tg!.initData;
+}
+
+export function isTelegramApp() {
+  return isTelegram;
 }
