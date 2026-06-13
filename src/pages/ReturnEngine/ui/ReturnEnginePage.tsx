@@ -15,6 +15,7 @@ import {
   SmallText,
   ClientDetail,
 } from "./ReturnEnginePage.styled.ts";
+import { useTelegramUser } from "@app/providers/Telegram/hooks";
 
 export const ReturnEnginePage = () => {
   const stats = {
@@ -69,9 +70,14 @@ export const ReturnEnginePage = () => {
     }
   };
 
+  const { user } = useTelegramUser();
+
+  console.log("user", user);
   return (
     <Page>
       <Header variant="h6">Главная</Header>
+
+      <div>user</div>
 
       <MainCard elevation={0}>
         <Typography variant="body2">Доход сегодня</Typography>

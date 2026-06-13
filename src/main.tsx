@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { initTelegram } from "./app/providers/telegram";
+import { initTelegram } from "@app/providers/Telegram/telegram.ts";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@shared/theme/theme";
 import App from "./App";
@@ -14,5 +14,5 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </StrictMode>,
+  </StrictMode>
 );
