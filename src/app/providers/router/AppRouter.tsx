@@ -2,9 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { MainLayout } from "../../layouts/MainLayout.tsx";
 
-import { ReturnEnginePage } from "@pages/ReturnEngine/ReturnEnginePage.tsx";
-import { MorePage } from "@pages/More/MorePage.tsx";
-import { ClientsPage } from "@pages/ClientsPage/ClientsPage.tsx";
+import {
+  AddClientPage,
+  ClientsPage,
+  ReturnEnginePage,
+  MorePage,
+} from "@pages/index.ts";
 
 // import { IncomePage } from "../../../pages/Income/ui/IncomePage";
 
@@ -16,6 +19,7 @@ export const AppRouter = () => {
           <Route path="/" element={<ReturnEnginePage />} />
 
           <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/clients/add" element={<AddClientPage />} />
 
           {/*<Route path="/income" element={<IncomePage />} />*/}
 
