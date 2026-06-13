@@ -77,7 +77,7 @@ export const ReturnEnginePage = () => {
     <Page>
       <Header variant="h6">Главная</Header>
 
-      <div>{user}</div>
+      <Typography>Привет, {user?.first_name}!</Typography>
 
       <MainCard elevation={0}>
         <Typography variant="body2">Доход сегодня</Typography>
