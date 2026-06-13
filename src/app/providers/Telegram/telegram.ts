@@ -1,4 +1,8 @@
-type TgUser = {
+import WebApp from "@twa-dev/sdk";
+
+export const tg = WebApp;
+
+export type TgUser = {
   id: number;
   first_name: string;
   last_name?: string;
@@ -7,51 +11,34 @@ type TgUser = {
   photo_url?: string;
 };
 
-function getTelegram() {
-  if (typeof window === "undefined") return null;
-  return window.Telegram?.WebApp ?? null;
-}
+const mockUser: TgUser = {
+  id: 999999,
+  first_name: "Тестовый",
+  last_name: "Пользователь",
+  username: "test_user",
+  language_code: "ru",
+  photo_url: "",
+};
 
-/**
- * Telegram считается активным только если есть WebApp и initDataUnsafe.user
- */
-export function isTelegramApp() {
-  const tg = getTelegram();
-  return !!tg?.initDataUnsafe?.user;
-}
+const isDev = import.meta.env.DEV;
 
-/**
- * Инициализация WebApp (только в Telegram)
- */
 export function initTelegram() {
-  const tg = getTelegram();
-
-  if (!tg?.initDataUnsafe?.user) return;
+  if (isDev) return;
 
   tg.ready();
   tg.expand();
 }
 
-/**
- * Получение пользователя
- * - в Telegram → real user
- * - не в Telegram → null
- */
 export function getTelegramUser(): TgUser | null {
-  const tg = getTelegram();
-
-  if (!tg?.initDataUnsafe?.user) return null;
-
-  return tg.initDataUnsafe.user;
+  if (isDev) return mockUser;
+  return tg.initDataUnsafe?.user ?? null;
 }
 
-/**
- * initData для backend (понадобится позже для проверки подписи)
- */
 export function getTelegramInitData() {
-  const tg = getTelegram();
+  if (isDev) return "mock-init-data";
+  return tg.initData ?? null;
+}
 
-  if (!tg?.initDataUnsafe?.user) return null;
-
-  return tg.initData || null;
+export function isTelegramApp() {
+  return !isDev && !!tg.initDataUnsafe?.user;
 }
