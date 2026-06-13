@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Box, Paper, Stack, Typography, Avatar } from "@mui/material";
-import { colors } from "@shared/theme/colors";
+import { colors } from "@shared/theme/colors.ts";
 
 export const Page = styled(Box)`
   padding: 16px;

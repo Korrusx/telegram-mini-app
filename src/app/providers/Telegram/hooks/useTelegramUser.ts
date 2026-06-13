@@ -1,11 +1,13 @@
 import { useMemo } from "react";
-import { getTelegramUser } from "../telegram.ts";
+import { getTelegramUser } from "../telegram";
 
-export const useTelegramUser = () => {
-  const user = useMemo(() => getTelegramUser(), []);
+export function useTelegramUser() {
+  return useMemo(() => {
+    const user = getTelegramUser();
 
-  return {
-    user,
-    isAuth: !!user,
-  };
-};
+    return {
+      user,
+      isTelegram: !!user,
+    };
+  }, []);
+}

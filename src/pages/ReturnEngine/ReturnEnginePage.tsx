@@ -72,7 +72,6 @@ export const ReturnEnginePage = () => {
 
   const { user } = useTelegramUser();
 
-  console.log("user", user);
   return (
     <Page>
       <Header variant="h6">Главная</Header>
