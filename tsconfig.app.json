@@ -18,6 +18,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
     "paths": {
       "@app/*": ["src/app/*"],
       "@pages/*": ["src/pages/*"],
