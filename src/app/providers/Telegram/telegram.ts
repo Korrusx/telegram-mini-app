@@ -1,15 +1,10 @@
 type TgUser = {
   id: number;
   first_name: string;
+  last_name?: string;
   username?: string;
+  language_code?: string;
   photo_url?: string;
-};
-
-const mockUser: TgUser = {
-  id: 1,
-  first_name: "Dev",
-  username: "dev_user",
-  photo_url: "",
 };
 
 function getTelegram() {
@@ -18,12 +13,11 @@ function getTelegram() {
 }
 
 /**
- * Telegram считается активным только если есть initData
- * (это самый стабильный признак Mini App)
+ * Telegram считается активным только если есть WebApp и initDataUnsafe.user
  */
 export function isTelegramApp() {
   const tg = getTelegram();
-  return !!tg?.initData;
+  return !!tg?.initDataUnsafe?.user;
 }
 
 /**
@@ -32,7 +26,7 @@ export function isTelegramApp() {
 export function initTelegram() {
   const tg = getTelegram();
 
-  if (!tg?.initData) return;
+  if (!tg?.initDataUnsafe?.user) return;
 
   tg.ready();
   tg.expand();
@@ -41,16 +35,14 @@ export function initTelegram() {
 /**
  * Получение пользователя
  * - в Telegram → real user
- * - вне Telegram → mock
+ * - не в Telegram → null
  */
-export function getTelegramUser(): TgUser {
+export function getTelegramUser(): TgUser | null {
   const tg = getTelegram();
 
-  const isTelegram = !!tg?.initData;
+  if (!tg?.initDataUnsafe?.user) return null;
 
-  if (!isTelegram) return mockUser;
-
-  return tg?.initDataUnsafe?.user ?? mockUser;
+  return tg.initDataUnsafe.user;
 }
 
 /**
@@ -59,9 +51,7 @@ export function getTelegramUser(): TgUser {
 export function getTelegramInitData() {
   const tg = getTelegram();
 
-  const isTelegram = !!tg?.initData;
+  if (!tg?.initDataUnsafe?.user) return null;
 
-  if (!isTelegram) return "mock-init-data";
-
-  return tg!.initData;
+  return tg.initData || null;
 }
