@@ -26,7 +26,7 @@ export function initTelegram() {
 export function getTelegramUser(): TgUser {
   if (!isTelegram) return mockUser;
 
-  return tg!.initDataUnsafe.user;
+  return tg!.initDataUnsafe.user || mockUser;
 }
 
 export function getTelegramInitData() {
