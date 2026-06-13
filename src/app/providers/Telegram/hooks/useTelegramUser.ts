@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getTelegramUser, isTelegramApp } from "../telegram.ts";
+import { getTelegramUser, isTelegramApp } from "../telegram";
 
 export function useTelegramUser() {
   return useMemo(() => {

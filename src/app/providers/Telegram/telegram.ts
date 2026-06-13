@@ -5,10 +5,6 @@ type TgUser = {
   photo_url?: string;
 };
 
-const tg = window.Telegram?.WebApp;
-
-const isTelegram = !!tg?.initDataUnsafe?.user;
-
 const mockUser: TgUser = {
   id: 1,
   first_name: "Dev",
@@ -16,25 +12,56 @@ const mockUser: TgUser = {
   photo_url: "",
 };
 
-export function initTelegram() {
-  if (!isTelegram) return;
-
-  tg?.ready();
-  tg?.expand();
+function getTelegram() {
+  if (typeof window === "undefined") return null;
+  return window.Telegram?.WebApp ?? null;
 }
 
+/**
+ * Telegram считается активным только если есть initData
+ * (это самый стабильный признак Mini App)
+ */
+export function isTelegramApp() {
+  const tg = getTelegram();
+  return !!tg?.initData;
+}
+
+/**
+ * Инициализация WebApp (только в Telegram)
+ */
+export function initTelegram() {
+  const tg = getTelegram();
+
+  if (!tg?.initData) return;
+
+  tg.ready();
+  tg.expand();
+}
+
+/**
+ * Получение пользователя
+ * - в Telegram → real user
+ * - вне Telegram → mock
+ */
 export function getTelegramUser(): TgUser {
+  const tg = getTelegram();
+
+  const isTelegram = !!tg?.initData;
+
   if (!isTelegram) return mockUser;
 
-  return tg!.initDataUnsafe.user || mockUser;
+  return tg?.initDataUnsafe?.user ?? mockUser;
 }
 
+/**
+ * initData для backend (понадобится позже для проверки подписи)
+ */
 export function getTelegramInitData() {
+  const tg = getTelegram();
+
+  const isTelegram = !!tg?.initData;
+
   if (!isTelegram) return "mock-init-data";
 
   return tg!.initData;
-}
-
-export function isTelegramApp() {
-  return isTelegram;
 }
