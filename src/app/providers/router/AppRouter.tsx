@@ -4,9 +4,9 @@ import { MainLayout } from "../../layouts/MainLayout.tsx";
 
 import { ReturnEnginePage } from "@pages/ReturnEngine/ReturnEnginePage.tsx";
 import { MorePage } from "@pages/More/MorePage.tsx";
-// import { ClientsPage } from "../../../pages/Clients/ui/ClientsPage";
+import { ClientsPage } from "@pages/ClientsPage/ClientsPage.tsx";
+
 // import { IncomePage } from "../../../pages/Income/ui/IncomePage";
-// import { MorePage } from "../../../pages/More/ui/MorePage";
 
 export const AppRouter = () => {
   return (
@@ -15,7 +15,7 @@ export const AppRouter = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<ReturnEnginePage />} />
 
-          {/*<Route path="/clients" element={<ClientsPage />} />*/}
+          <Route path="/clients" element={<ClientsPage />} />
 
           {/*<Route path="/income" element={<IncomePage />} />*/}
 
