@@ -28,12 +28,25 @@ import { supabase } from "@app/providers/Supabase/supabase";
 
 type TabType = "all" | "active" | "regular";
 
+type Client = {
+  id: string;
+  user_id: number;
+  name: string;
+  service: string | null;
+  cycle: string | null;
+  phone: string | null;
+  notes: string | null;
+  avatar_url: string | null;
+  status: string | null;
+  created_at: string;
+};
+
 export const ClientsPage = () => {
   const navigate = useNavigate();
   const { user } = useTelegramUser();
 
   const [tab, setTab] = useState<TabType>("all");
-  const [clients, setClients] = useState<any[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(false);
 
   // =========================
@@ -61,7 +74,7 @@ export const ClientsPage = () => {
       setLoading(false);
     };
 
-    fetchClients();
+    void fetchClients();
   }, [user?.id]);
 
   // =========================
@@ -144,7 +157,7 @@ export const ClientsPage = () => {
                   {client.status}
                 </StatusText>
 
-                <SmallText>{client.days ?? 0} дней назад</SmallText>
+                <SmallText>{client.cycle ?? ""}</SmallText>
               </Box>
 
               <MenuButton onClick={() => console.log("menu", client.id)}>
