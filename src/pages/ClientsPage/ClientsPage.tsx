@@ -153,7 +153,7 @@ export const ClientsPage = () => {
 
             <ClientActions>
               <Box sx={{ textAlign: "right" }}>
-                <StatusText color={getStatusColor(client.status)}>
+                <StatusText color={getStatusColor(client.status ?? "")}>
                   {client.status}
                 </StatusText>
 
