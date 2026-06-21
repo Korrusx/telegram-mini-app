@@ -9,12 +9,16 @@ declare global {
           user?: {
             id: number;
             first_name: string;
+            last_name?: string;
             username?: string;
+            language_code?: string;
             photo_url?: string;
           };
         };
+        version: string;
         ready: () => void;
         expand: () => void;
+        close: () => void;
       };
     };
   }
