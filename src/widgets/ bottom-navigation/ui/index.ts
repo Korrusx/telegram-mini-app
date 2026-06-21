@@ -1,1 +1,0 @@
-export { AppBottomNavigation } from "./AppBottomNavigation";

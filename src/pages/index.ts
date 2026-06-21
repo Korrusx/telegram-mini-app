@@ -1,4 +1,4 @@
-export { AddClientPage } from "./AddClientPage";
-export { ClientsPage } from "./ClientsPage";
-export { ReturnEnginePage } from "./ReturnEngine";
-export { MorePage } from "./More";
+export { HomePage } from "./home";
+export { ClientsPage } from "./clients";
+export { AddClientPage } from "./add-client";
+export { MorePage } from "./more";
