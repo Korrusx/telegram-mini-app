@@ -1,3 +1,5 @@
+import "@twa-dev/sdk";
+
 export type TgUser = {
   id: number;
   first_name: string;
