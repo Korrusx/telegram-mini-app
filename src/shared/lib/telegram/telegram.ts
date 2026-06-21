@@ -1,5 +1,3 @@
-import WebApp from "@twa-dev/sdk";
-
 export type TgUser = {
   id: number;
   first_name: string;
@@ -23,20 +21,23 @@ const isDev = import.meta.env.DEV;
 export function initTelegram() {
   if (isDev) return;
 
-  if (typeof WebApp.ready === "function") WebApp.ready();
-  if (typeof WebApp.expand === "function") WebApp.expand();
+  const wa = window.Telegram?.WebApp;
+  if (!wa) return;
+
+  wa.ready();
+  wa.expand();
 }
 
 export function getTelegramUser(): TgUser | null {
   if (isDev) return mockUser;
-  return WebApp.initDataUnsafe?.user ?? null;
+  return window.Telegram?.WebApp?.initDataUnsafe?.user ?? null;
 }
 
 export function getTelegramInitData() {
   if (isDev) return "mock-init-data";
-  return WebApp.initData ?? null;
+  return window.Telegram?.WebApp?.initData ?? null;
 }
 
 export function isTelegramApp() {
-  return !isDev && !!WebApp.initDataUnsafe?.user;
+  return !isDev && !!window.Telegram?.WebApp?.initDataUnsafe?.user;
 }
